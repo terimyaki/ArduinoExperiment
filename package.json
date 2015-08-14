@@ -18,5 +18,9 @@
   "homepage": "https://github.com/terimyaki/ArduinoExperiment#readme",
   "dependencies": {
     "johnny-five": "^0.8.85"
+  },
+  "devDependencies": {
+    "bluebird": "^2.9.34",
+    "del": "^1.2.0"
   }
 }

@@ -40,4 +40,5 @@ CircuitDataParser.prototype._transform = function(chunk, enc, cb){
 };
 
 CircuitDataParser.prototype._flush = function(cb) {
+	cb();
 };

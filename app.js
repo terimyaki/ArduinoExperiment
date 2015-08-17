@@ -1,44 +1,35 @@
-var fs = require('fs'),
-	StringDecoder = require('string_decoder').StringDecoder,
-	util = require('util'),
-	stream = require('stream'),
-	Transform = stream.Transform;
+var app = require('app'),
+	BrowserWindow = require('browser-window');
 
-var arduinoDataStream = fs.createReadStream('arduinoTest2.txt');
-arduinoDataStream.setEncoding('utf8');
+require('crash-reporter').start();
 
-arduinoDataStream.on('readable', function(){
-	var chunk,
-		line = '',
-		counter = 0;
-	while(null !== (chunk = arduinoDataStream.read(1))){
-		if (/\n/.test(chunk)){
-			console.log('Line ' + counter + ': ' + line);
-			line = '';
-			counter++;
-		} else line += chunk;
-	}
+var mainWindow = null;
+
+app.on('window-all-closed', function() {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform != 'darwin') {
+    app.quit();
+  }
 });
 
-function CircuitDataParser(opts){
-	// allow use without new
-	if (!(this instanceof Upper)) {
-		return new CircuitDataParser(options);
-	}
-	var options = opts || {};
-	options.readableObjectMode = true;
-	// init Transform
-	Transform.call(this, options);
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+app.on('ready', function() {
+  // Create the browser window.
+  mainWindow = new BrowserWindow({width: 800, height: 600});
 
-	this._buffer = '';
-	this._decoder = new StringDecoder('utf8');
-}
+  // and load the index.html of the app.
+  mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
-util.inherits(CircuitDataParser, Transform);
-CircuitDataParser.prototype._transform = function(chunk, enc, cb){
-	console.log('these are the arguments', [].slice.call(arguments, 0));
-};
+  // Open the devtools.
+  mainWindow.openDevTools();
 
-CircuitDataParser.prototype._flush = function(cb) {
-	cb();
-};
+  // Emitted when the window is closed.
+  mainWindow.on('closed', function() {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null;
+  });
+});

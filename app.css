@@ -1,0 +1,32 @@
+.text-center {
+  text-align: center; }
+
+.text-left {
+  text-align: left; }
+
+#header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around; }
+  #header > div {
+    text-align: center;
+    padding: 10px; }
+    #header > div > h5 {
+      border-bottom: 1px solid black; }
+
+#max-container {
+  display: flex;
+  flex-direction: column; }
+  #max-container > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 10px; }
+    #max-container > div > title {
+      border-right: 1px solid black; }
+    #max-container > div p {
+      margin-bottom: 0px; }
+
+/*# sourceMappingURL=app.css.map */

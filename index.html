@@ -4,20 +4,51 @@
 	<title>Watch Your Circuit Go</title>
 	<link rel='stylesheet' href='node_modules/material-design-lite/material.min.css'>
 	<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+	<link href='app.css' rel='stylesheet'>
 </head>
 <body>
 	<div class='mdl-layout mdl-js-layout has-drawer is-upgraded'>
 		<main class='mdl-layout__content'>
-			<div class='mdl-color--white mdl-color-text--grey-600' id='resistance'>
-				<p></p>
-			</div>
-			<div class='mdl-grid'>
-				<div id='header' class='mdl-cell--6-col'></div>
-				<div id='gauge' class='mdl-cell--6-col'></div>
-			</div>
-			<div id='container'></div>
+			<h4 class='text-center'>Circuit Specification</h2>
+			<div id='header'></div>
+			<article class='mdl-grid'>
+				<section class='mdl-cell mdl-cell--4-col'>
+					<h4 class='text-center'>Resistance Reading</h4>
+					<div id='max-container'>
+						<div>
+							<div class='title text-left '>
+								<strong>Max Resistance</strong>
+							</div>
+							<div class='resistance'>
+								<p class='text-center mdl-color-text--grey-600'></p>
+							</div>
+						</div>
+						<div>
+							<div class='title text-left'>
+								<strong>Voltage 2</strong>
+							</div>
+							<div class='voltage'>
+								<p class='text-center mdl-color-text--grey-600'></p>
+							</div>
+						</div>
+					</div>
+					<div id='readings'>
+						<table>
+							<tr>
+								<th>Time</th>
+								<th>Analog Reading</th>
+								<th>Voltage 2 Calc</th>
+								<th>Variable Resistance Calc</th>
+							</tr>
+						</table>
+					</div>
+				</section>
+				<section id='graph-container' class='mdl-cell mdl-cell--8-col'>
+					<h4 class='text-center'>Graph</h4>
+					<div class='graph'></div>
+				</section>
+			</article>
 		</main>
-		
 	</div>
 
 	<!-- loading scripts -->

@@ -29,4 +29,23 @@
     #max-container > div p {
       margin-bottom: 0px; }
 
+#readings {
+  margin-top: 10px;
+  max-height: 50vh;
+  overflow-y: scroll; }
+  #readings > table {
+    border: 1px solid grey;
+    border-radius: 2px; }
+    #readings > table tr {
+      border: 1px solid grey; }
+    #readings > table th {
+      border: 1px solid grey;
+      padding: 2px;
+      text-align: center; }
+    #readings > table td {
+      padding: 2px; }
+
+#graph-container > #graph {
+  overflow: scroll; }
+
 /*# sourceMappingURL=app.css.map */

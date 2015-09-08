@@ -14,7 +14,7 @@
 			<article class='mdl-grid'>
 				<section class='mdl-cell mdl-cell--4-col'>
 					<h4 class='text-center'>Resistance Reading</h4>
-					<div id='max-container'>
+					<div id='max-container' class='mdl-shadow--2dp'>
 						<div>
 							<div class='title text-left '>
 								<strong>Max Resistance</strong>
@@ -33,19 +33,21 @@
 						</div>
 					</div>
 					<div id='readings'>
-						<table>
-							<tr>
+						<table class='mdl-data-table mdl-js-data-table mdl-shadow--2dp'>
+							<thead></thead>
+							<tbody></tbody>
+							<!-- <tr>
 								<th>Time</th>
 								<th>Analog Reading</th>
-								<th>Voltage 2 Calc</th>
-								<th>Variable Resistance Calc</th>
-							</tr>
+								<th>Voltage 2</th>
+								<th>Variable Resistance</th>
+							</tr> -->
 						</table>
 					</div>
 				</section>
 				<section id='graph-container' class='mdl-cell mdl-cell--8-col'>
 					<h4 class='text-center'>Graph</h4>
-					<div class='graph'></div>
+					<div id='graph'></div>
 				</section>
 			</article>
 		</main>

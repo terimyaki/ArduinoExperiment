@@ -1,4 +1,4 @@
-.text-center {
+ .text-center {
 	text-align:center;
 }
 
@@ -37,14 +37,31 @@
 		}
 	}
 }
-// article {
-// 	display:flex;
-// 	flex-direction: row;
-// 	flex-wrap: nowrap;
-// 	justify-content:space-between;
-// 	& > section {
-// 		display:flex;
-// 		flex-direction: column;
-// 		padding : 20px;
-// 	}
-// }
+
+
+#readings {
+	margin-top: 10px;
+	max-height: 50vh;
+	overflow-y: scroll;
+	& > table {
+		border : 1px solid grey;
+		border-radius : 2px;
+		& tr {
+			border : 1px solid grey;
+		}
+		& th {
+			border : 1px solid grey;
+			padding : 2px;
+			text-align:center;
+		}
+		& td {
+			padding : 2px;
+		}
+	}
+}
+
+#graph-container {
+	& > #graph {
+		overflow: scroll;
+	}
+}

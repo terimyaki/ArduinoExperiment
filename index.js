@@ -168,6 +168,9 @@ function setupGraph(w, h, data){
 						.attr("class", "y axis")
 						.call(yAxisFunc);
 
+
+
+
 	function redraw(data){
 
 		if(data){
@@ -183,8 +186,8 @@ function setupGraph(w, h, data){
 				.transition()
 				.duration(500)
 				.ease("linear")
-				.attr("transform", "translate(" + x(-1) + ",0)")
-				.each('end', redraw.bind(this, data)); //this is causing flickering
+				//.attr("transform", "translate(" + x(-1) + ",0)")
+				//.each('end', redraw.bind(this, data)); //this is causing flickering
 		}
 
 	}

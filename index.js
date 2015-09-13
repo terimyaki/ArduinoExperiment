@@ -119,6 +119,12 @@ function updateTable(data){
 }
 
 function updateGraph(data){
+	if(!this.redraw) this.redraw = setupGraph(720, 500, data).redraw;
+	var redraw = this.redraw;
+	redraw(data);
+}
+
+function setupGraph(w, h, data){
 	//svg size config
 	var margin = {
 			top : 20,
@@ -126,37 +132,64 @@ function updateGraph(data){
 			left: 80,
 			right: 20
 		},
-		width = 960 - margin.left - margin.right,
-		height = 500 - margin.top -margin.bottom;
+		width = w - margin.left - margin.right,
+		height = h - margin.top -margin.bottom;
 
 	var x = d3.time.scale().range([0, width]),
 		y = d3.scale.linear().range([height, 0]),
-		xAxis = d3.svg.axis().scale(x).orient('bottom').ticks(5),
-		yAxis = d3.svg.axis().scale(y).orient('left').ticks(5),
+		xAxisFunc = d3.svg.axis().scale(x).orient('bottom').ticks(5),
+		yAxisFunc = d3.svg.axis().scale(y).orient('left').ticks(5),
 		svg = d3.select('#graph').append('svg')
 								.attr('width', width + margin.left + margin.right)
 								.attr('height', height + margin.top + margin.bottom)
 								.append('g')
 								.attr('transform', 'translate(' + margin.left+ ',' + margin.top + ')'),
-		valueline = d3.svg.line().x(function(d) { return x(d.Time); }).y(function(d) { return y(d.Resistance_Calc); });
+		valueline = d3.svg.line()
+							.x(function(d) { return x(d.Time); })
+							.y(function(d) { return y(d.Resistance_Calc); });
+
+		// Add the valueline path. Keep reference of path so that you can update it later for transition
+		var path = svg.append('path')
+						.attr('class', 'line')
+						.attr('d', valueline(data));
+
 		// Scale the range of the data
 		x.domain(d3.extent(data, function(d) { return d.Time; }));
 		y.domain([0, d3.max(data, function(d) { return d.Resistance_Calc; })]);
 
-		// Add the valueline path.
-		svg.append('path')
-			.attr('class', 'line')
-			.attr('d', valueline(data));
-
 		// Add the X Axis
-		svg.append('g')
-			.attr('class', 'x axis')
-			.attr('transform', 'translate(0,' + height + ')')
-			.call(xAxis);
+		var xAxis = svg.append('g')
+						.attr('class', 'x axis')
+						.attr('transform', 'translate(0,' + height + ')')
+						.call(xAxisFunc);
 
 		// Add the Y Axis
-		svg.append("g")
-			.attr("class", "y axis")
-			.call(yAxis);
+		var yAxis = svg.append("g")
+						.attr("class", "y axis")
+						.call(yAxisFunc);
 
+	function redraw(data){
+
+		if(data){
+			// Scale the range of the data
+			x.domain(d3.extent(data, function(d) { return d.Time; }));
+			y.domain([0, d3.max(data, function(d) { return d.Resistance_Calc; })]);
+
+			xAxis.transition().duration(500).ease('linear').call(xAxisFunc);
+			yAxis.transition().duration(500).ease('linear').call(yAxisFunc);
+
+			path.attr("d", valueline(data))
+				.attr("transform", null)
+				.transition()
+				.duration(500)
+				.ease("linear")
+				.attr("transform", "translate(" + x(-1) + ",0)")
+				.each('end', redraw.bind(this, data)); //this is causing flickering
+		}
+
+	}
+
+	return {
+		redraw : redraw
+	};
 }

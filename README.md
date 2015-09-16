@@ -12,3 +12,5 @@ See image below for the diagram of my setup.
 ## Start It Up
 This is an Electron app, so once Electron is installed in your cli, at the root file of this project, type: 
 `electron .`
+
+![Figure 1-2](images/screenshot.png?raw=true)
